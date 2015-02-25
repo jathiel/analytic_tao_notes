@@ -1,9 +1,8 @@
 \documentclass[11pt]{article}
 
 \usepackage{amsmath}
-\usepackage{graphics}
-\usepackage{tikz}
-\usepackage{pgfplots}
+\usepackage{amsthm}
+\usepackage{amsfonts}
 
 \pdfpagewidth 8.5in
 \pdfpageheight 11in
@@ -18,10 +17,90 @@
 \headsep 0in
 \footskip .75in
 
+\allowdisplaybreaks
+
+\newtheorem{innercustomthm}{Exercise}
+\newenvironment{ex}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
 \begin{document}
 
 \title{Comments, Notes and Problem Solutions for Terry Tao's Analytic Number Theory Notes}
+\date{}
 \maketitle
 
+\section{Summing monotone functions}
+
+\begin{ex}{4}\label{four}
+For non-negative numbers $k,l\geq0$, show that
+\begin{align}
+\sum_{n\leq x}\log^k{n}\log^l{\frac{x}{n}} &= xP_{k,l}(\log{x})+O_{k,l}(\log^{k+l}{(2+x)})\label{four_result}
+\end{align}
+for all $x\geq 0$ and some polynomal $P_{k,l}(t)$ with leading term $l!t^k$.
+\end{ex}
+
+\begin{proof}
+We prove Exercise~\ref{four} by induction on $l$. Furthermore, we will show that
+\begin{align}
+P_{k,l}(t) &= \sum_{i=0}^k(-1)^i(l+i)!\binom{k}{i}t^{k-i}.\label{pkl_poly}
+\end{align}
+
+We begin with the case where $l=0$. By Lemma 2, we have
+\begin{align}
+\sum_{n\leq x}\log^k{n} &= \int_1^x\log^k{t}\;dt + O_k(\log^k(2+x))\label{log_base_case}
+\end{align}
+for $x\geq 0$. Using integration by parts, for any $k\geq0$, we have
+\begin{align}
+\int_1^x\log^k{t}\;dt &= t\log^k{t}\Big\vert_1^x-k\int_1^x\log^{k-1}{t}\;dt.\label{log_by_parts}
+\end{align}
+It now follows by induction on~\eqref{log_by_parts} that
+\begin{align}
+\int_1^x\log^k{t}\;dt &= x\log^k{x}-kx\log^{k-1}{x}+k(k-1)x\log^{k-1}{x}+\cdots+(-1)^kk!(x-1)\notag\\
+&= x\big(\log^k{x}-k\log^{k-1}{x}+\cdots+(-1)^kk!\big)+(-1)^{k+1}k!\notag\\
+&= x\sum_{i=0}^{k}(-1)^i\frac{k!}{(k-i)!}\log^{k-j}{x}+(-1)^{k+1}k!\notag\\
+&= xP_{k,0}(\log{x})+O_k(1).\label{log_poly}
+\end{align}
+Combining~\eqref{log_base_case} with~\eqref{log_poly} shows that~\eqref{four_result} holds in this case.
+
+Now we assume that~\eqref{four_result} holds for some value $l-1\geq 0$. Then, by the induction hypothesis, we have
+\begin{align}
+\sum_{n\leq x}\log^k{n}\log^l{\frac{x}{n}} &= \sum_{n\leq x}(\log^k{n})(\log{x}-\log{n})^l\notag\\
+&= \sum_{n\leq x}(\log^k{n})(\log{x}-\log{n})^{l-1}(\log{x}-\log{n})\notag\\
+&= x(\log{x}\cdot P_{k,l-1}(\log{x})-P_{k+1,l-1}(\log{x}))+O_{k,l}(\log^{k+l}(2+x))\label{log_diff}
+\end{align}
+for $x\geq 0$. From~\eqref{log_diff}, we see that in order to complete the proof, we must show that
+\begin{align*}
+t\cdot P_{k,l-1}(t)-P_{k+1,l-1}(t) &= P_{k,l}(t).
+\end{align*}
+From~\eqref{pkl_poly}, we have
+\begin{align*}
+t\cdot P_{k,l-1}(t)-P_{k+1,l-1}(t) &= \sum_{i=0}^k(-1)^i(l-1+i)!\binom{k}{i}t^{k+1-i}-\sum_{i=0}^{k+1}(-1)^i(l-1+i)!\binom{k+1}{i}t^{k+1-i}\\
+&= \sum_{i=0}^k(-1)^i(l-1+i)!\bigg(\binom{k}{i}-\binom{k+1}{i}\bigg)t^{k+1-i}+(-1)^{k+1}(l+k)!\\
+&= \sum_{i=1}^k(-1)^{i+1}(l-1+i)!\binom{k}{i-1}t^{k+1-i}+(-1)^{k+1}(l+k)!\\
+&= \sum_{i=0}^{k-1}(-1)^i(l+i)!\binom{k}{i}t^{k-i}+(-1)^{k+1}(l+k)!\\
+&= P_{k,l}(t).
+\end{align*}
+Therefore~\eqref{four_result} holds.
+\end{proof}
+
+\begin{ex}{6}\label{six}
+Let $f:\mathbb{N}\to\mathbb{C}$, $F:\mathbb{R}^+\to\mathbb{C}$ and $g:\mathbb{R}^+\to\mathbb{R}^+$ be functions such that $g(x)\to 0$ as $x\to\infty$. Then the following are equivalent:
+\begin{enumerate}
+\item[(i)]One has
+\begin{align*}
+\sum_{y\leq n<x} f(n) = F(x)-F(y)+O(g(x)+g(y))
+\end{align*}
+for all $1\leq y<x$.
+\item[(ii)] There exists a constant $c\in\mathbb{C}$ such that
+\begin{align*}
+\sum_{n<x}f(n) = c+F(x)+O(g(x))
+\end{align*}
+for all $x\geq 1$. In particular, $c=-F(1)+O(g(1))$.
+\end{enumerate}
+The quantity $c$ in (ii) is unique; it is also real-valued if $f$ and $F$ are real-valued.
+
+If in addition $F(x)\to 0$ as $x\to 0$, then when (ii) holds, $\sum_{n=1}^\infty f(n)$ converges conditionally to $c$.
+\end{ex}
 
 \end{document}
