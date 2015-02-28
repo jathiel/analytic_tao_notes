@@ -3,4 +3,4 @@ Comments, notes, and problem solutions for Terry Tao's analytic number theory no
 
 Tao's first set of notes can be found here:
 
-https://terrytao.wordpress.com/2014/11/23/254a-notes-1-elementary-multiplicative-number-theory/
+https://terrytao.wordpress.com/2014/11/23/254a-notes-1-elementary-multiplicative-number-theory/ 
