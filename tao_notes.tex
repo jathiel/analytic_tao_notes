@@ -122,7 +122,7 @@ We begin by establishing the following identity:
 \begin{align}
 \sum_{n\leq x}\frac{f(n)}{n} &= \frac{1}{x}\sum_{n\leq x}f(n)+\int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}.\label{log_identity}
 \end{align}
-Starting by splitting up the integral on the right-hand side of~\eqref{log_identity}, we get that
+By splitting up the integral on the right-hand side of~\eqref{log_identity}, we get that
 \begin{align}
 \int_1^x\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt &= \sum_{m=1}^{[x]-1}\int_m^{m+1}\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt+\int_{[x]}^{x}\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt\notag\\
 &= \sum_{m=1}^{[x]-1}\int_m^{m+1}\frac{1}{t^2}\sum_{n\leq m}f(n)\;dt+\int_{[x]}^x\frac{1}{t^2}\sum_{n\leq x}f(n)\;dt.\label{const_sum}
@@ -149,8 +149,8 @@ Given any $\epsilon >0$, there is an $x_0:=x_0(\epsilon)$ such that $|\frac{1}{x
 \begin{align}
 \int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t} &= \int_1^{x_0}\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}+\int_{x_0}^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}\notag\\
 &= M(\epsilon)+\int_{x_0}^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}\notag\\
-&= M(\epsilon)+\int_{x_0}^x\alpha+\bigg(\sum_{n\leq t}f(n)-\alpha\bigg)\frac{dt}{t}\notag\\
-&= M(\epsilon)+\alpha(\log{x}-\log{x_0})+\int_{x_0}^x\bigg(\sum_{n\leq t}f(n)-\alpha\bigg)\frac{dt}{t}.\label{bound}
+&= M(\epsilon)+\int_{x_0}^x\bigg(\alpha+\frac{1}{t}\sum_{n\leq t}f(n)-\alpha\bigg)\frac{dt}{t}\notag\\
+&= M(\epsilon)+\alpha(\log{x}-\log{x_0})+\int_{x_0}^x\bigg(\frac{1}{t}\sum_{n\leq t}f(n)-\alpha\bigg)\frac{dt}{t}.\label{bound}
 \end{align}
 From~\eqref{bound} it immediately follows that
 \begin{align}
@@ -162,6 +162,69 @@ for $x>x_0$. The desired result now follows from~\eqref{log_lim} since we can ma
 
 \begin{ex}{8}\label{eight}
 Let $f$ be an arithmetic function obeying the crude bound $f(n) = O(n^{o(1)})$, and let $\alpha$ be a complex number. If the logarithmic density of $f$ exists and is equal to $\alpha$, show that $(s-1)\mathcal{D}f(s)\to\alpha$ as $s\to 1^+$, or in other words that $\mathcal{D}f(s)=\frac{\alpha}{s-1}+o\big(\frac{1}{s-1}\big)$ as $s\to 1^+$.
+\end{ex}
+
+\begin{proof}
+We begin by establishing the following identity:
+\begin{align}
+\frac{1}{n^s} &= \frac{1}{n}\int_n^\infty\frac{s-1}{x^s}\;dx\label{ns_identity}
+\end{align}
+for $s>1$.
+Beginning with the right-hand side of~\eqref{ns_identity}, we get
+\begin{align*}
+\frac{1}{n}\int_n^\infty\frac{s-1}{x^s}\;dx &= \lim_{R\to\infty}\frac{s-1}{n}\int_n^R\frac{1}{x^s}\;dx\\
+&= \lim_{R\to\infty}\frac{-1}{nx^{s-1}}\Big|_n^R\\
+&= \frac{1}{n^s}.
+\end{align*}
+Now, by~\eqref{ns_identity}
+\begin{align}
+\mathcal{D}f(s) &= \lim_{N\to\infty} \sum_{n\leq N}\frac{f(n)}{n^s}\notag\\
+&= \lim_{N\to\infty} \sum_{n\leq N}\frac{f(n)}{n}\int_n^\infty\frac{s-1}{x^s}\;dx\notag\\
+&= \lim_{N\to\infty} \bigg(\int_1^N\frac{s-1}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx+\int_N^\infty\frac{s-1}{x^s}\sum_{n\leq N}\frac{f(n)}{n}\;dx\bigg)\label{int_sum_change}\\
+&= \lim_{N\to\infty} \bigg(\int_1^N\frac{s-1}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx+\frac{1}{N^{s-1}}\sum_{n\leq N}\frac{f(n)}{n}\bigg)\label{eval_int}.
+\end{align}
+We obtain~\eqref{int_sum_change} by rearranging the order of the sum and integral. Note that in~\eqref{int_sum_change}, the sum inside the second integral does not depend on $x$. This gives~\eqref{eval_int}.
+
+For any $s>1$, let $0<\epsilon<s-1$ be given. Then, as in the previous proof, there is an $N_0:=N(\epsilon)$ such that
+\begin{align}
+\frac{1}{N^{s-1}}\sum_{n\leq N}\frac{f(n)}{n} &= \frac{1}{N^{s-1}}\sum_{n\leq N_0}\frac{f(n)}{n}+O_\epsilon\bigg(\frac{1}{N^{s-1}}\sum_{N_0<n\leq N}\frac{1}{n^{1-\epsilon}}\bigg)\notag\\
+&= O_\epsilon\bigg(\frac{1}{N^{s-1}}+N^{\epsilon-(s-1)}\bigg).\label{no_contribution}
+\end{align}
+Note that~\eqref{no_contribution} goes to 0 as $N\to\infty$ regardless of the choice of all sufficiently small $\epsilon$. In particular, this term will not contribute anything to the limit in~\eqref{eval_int}. This reduces our problem to showing that
+\begin{align*}
+\lim_{s\to1^+}\int_1^\infty\frac{(s-1)^2}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx &= \alpha.
+\end{align*}
+
+Using the same type of argument as in Exercise~\ref{eight}, for any $\epsilon'>0$ there is an $N_1:=N_1(\epsilon')$ such that
+\begin{align*}
+\int_1^N\frac{s-1}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx &= \int_1^N\frac{(s-1)\log{x}}{x^s}\bigg(\alpha+\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n}-\alpha\bigg)\;dx\\ &= \alpha K(s,N)+M(\epsilon')+\int_{N_1}^N\frac{(s-1)\log{x}}{x^s}\bigg(\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n}-\alpha\bigg)\;dx.
+\end{align*}
+where $K(s,N):=\int_{1}^N\frac{(s-1)\log{x}}{x^s}\;dx$. Notice that $K(s,N)$ actually converges as $N\to\infty$ for any $s>1$. With this in mind, we define $K(s):=\lim_{N\to\infty}K(s,N)$. So
+\begin{align}
+\bigg|\int_1^\infty\frac{(s-1)^2}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx -\alpha\bigg| &< (s-1)\bigg(|M(\epsilon')|+\epsilon ' K(s)+|\alpha|\cdot\bigg|K(s)-\frac{1}{s-1}\bigg|\bigg).\label{final_form_limit}
+\end{align}
+Therefore, by~\eqref{final_form_limit}, to get the desired result, it is enough to show that $(s-1)K(s,N)\to 1$ as $N\to\infty$. A simple calculation shows that
+\begin{align*}
+(s-1)K(s,N) &=\int_1^N\frac{(s-1)^2\log{x}}{x^s}\;dx\\
+&= -\frac{(s-1)\log{x}+1}{x^{s-1}}\bigg|_1^N\\
+&= 1-\frac{(s-1)\log{N}+1}{N^{s-1}},
+\end{align*}
+which gives the desired limit. This shows that the inequality in~\eqref{final_form_limit} can be made arbitrarily small as $s\to1^+$.
+\end{proof}
+
+\begin{ex}{9}\label{nine}
+\begin{enumerate}
+\item[(i)] For any integer $k\geq 0$, show that
+\begin{align*}
+\sum_{n\leq x}\frac{\log^k{n}}{n}=Q_k(\log{x})+O_k\bigg(\frac{\log^k{(2+x)}}{x}\bigg)
+\end{align*}
+for all $x\geq 1$, where $Q_k(t)$ is a polynomial with leading term $\frac{1}{k+1}t^{k+1}$.
+\item[(ii)] More generally, for any integers $k,l\geq0$, show that
+\begin{align*}
+\sum_{n\leq x}\frac{\log^k{n}\log^l{\frac{x}{n}}}{n}=Q_{k,l}(\log{x})+O_{k,l}\bigg(\frac{\log^{k+l}{(2+x)}}{x}\bigg)
+\end{align*}
+for all $x\geq 1$, where $Q_{k,l}(t)$ is a polynomial with leading term $\frac{k!l!}{(k+l+1)!}t^{k+l+1}$.
+\end{enumerate}
 \end{ex}
 
 \end{document}
