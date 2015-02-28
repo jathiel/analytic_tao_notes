@@ -26,7 +26,7 @@
 
 \begin{document}
 
-\title{Comments, Notes and Problem Solutions for Terry Tao's Analytic Number Theory Notes}
+\title{Comments, Notes, and Problem Solutions for Terry Tao's Analytic Number Theory Notes}
 \date{}
 \maketitle
 
@@ -76,9 +76,9 @@ t\cdot P_{k,l-1}(t)-P_{k+1,l-1}(t) &= P_{k,l}(t).
 From~\eqref{pkl_poly}, we have
 \begin{align*}
 t\cdot P_{k,l-1}(t)-P_{k+1,l-1}(t) &= \sum_{i=0}^k(-1)^i(l-1+i)!\binom{k}{i}t^{k+1-i}-\sum_{i=0}^{k+1}(-1)^i(l-1+i)!\binom{k+1}{i}t^{k+1-i}\\
-&= \sum_{i=0}^k(-1)^i(l-1+i)!\bigg(\binom{k}{i}-\binom{k+1}{i}\bigg)t^{k+1-i}+(-1)^{k+1}(l+k)!\\
-&= \sum_{i=1}^k(-1)^{i+1}(l-1+i)!\binom{k}{i-1}t^{k+1-i}+(-1)^{k+1}(l+k)!\\
-&= \sum_{i=0}^{k-1}(-1)^i(l+i)!\binom{k}{i}t^{k-i}+(-1)^{k+1}(l+k)!\\
+&= \sum_{i=0}^k(-1)^i(l-1+i)!\bigg(\binom{k}{i}-\binom{k+1}{i}\bigg)t^{k+1-i}+(-1)^k(l+k)!\\
+&= \sum_{i=1}^k(-1)^{i+1}(l-1+i)!\binom{k}{i-1}t^{k+1-i}+(-1)^k(l+k)!\\
+&= \sum_{i=0}^{k-1}(-1)^i(l+i)!\binom{k}{i}t^{k-i}+(-1)^k(l+k)!\\
 &= P_{k,l}(t).
 \end{align*}
 Therefore~\eqref{four_result} holds.
@@ -101,6 +101,67 @@ for all $x\geq 1$. In particular, $c=-F(1)+O(g(1))$.
 The quantity $c$ in (ii) is unique; it is also real-valued if $f$ and $F$ are real-valued.
 
 If in addition $F(x)\to 0$ as $x\to 0$, then when (ii) holds, $\sum_{n=1}^\infty f(n)$ converges conditionally to $c$.
+\end{ex}
+
+\begin{proof}
+$(2)\Rightarrow(1):$ This direction is trivial.
+
+$(1)\Rightarrow(2):$ Let
+\begin{align}
+E(x):= \sum_{n<x} f(n) - F(x).\label{e_def}
+\end{align}
+Our goal is to show that~\eqref{e_def} converges to some constant as $x\to\infty$. Suppose that this is not the case. Then there is some $\epsilon >0$ and two strictly increasing sequences $\{x_n\}_{n=1}^\infty$, $\{y_n\}_{n=1}^\infty$ with $x_n > y_n\geq 1$ for all $n$ such that $|E(x_n)-E(y_n)| \geq \epsilon$. However, by assumption, we have that $E(x_n)-E(y_n)=O(g(x_n)+g(y_n))$, which converges to 0 as $n\to\infty$. This contradiction gives the desired result.
+\end{proof}
+
+\begin{ex}{7}\label{seven}
+Let $f$ be an arithmetic function. If the natural density $\lim_{x\to\infty}\frac{1}{x}\sum_{n\leq x}f(n)$ of $f$ exists and is equal to some complex number $\alpha$, show that the logarithmic density $\lim_{x\to\infty}\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n}$ also exists and is equal to $\alpha$.
+\end{ex}
+
+\begin{proof}
+We begin by establishing the following identity:
+\begin{align}
+\sum_{n\leq x}\frac{f(n)}{n} &= \frac{1}{x}\sum_{n\leq x}f(n)+\int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}.\label{log_identity}
+\end{align}
+Starting by splitting up the integral on the right-hand side of~\eqref{log_identity}, we get that
+\begin{align}
+\int_1^x\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt &= \sum_{m=1}^{[x]-1}\int_m^{m+1}\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt+\int_{[x]}^{x}\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt\notag\\
+&= \sum_{m=1}^{[x]-1}\int_m^{m+1}\frac{1}{t^2}\sum_{n\leq m}f(n)\;dt+\int_{[x]}^x\frac{1}{t^2}\sum_{n\leq x}f(n)\;dt.\label{const_sum}
+\end{align}
+In~\eqref{const_sum}, we replace the $t$ in the sum inside the integral with $m$ because the sum is constant on the interval $[m,m+1)$. So,
+\begin{align}
+\int_1^x\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt &= \sum_{m=1}^{[x]-1}\sum_{n\leq m}f(n)\int_m^{m+1}\frac{1}{t^2}\;dt+\sum_{n\leq x}f(n)\int_{[x]}^x\frac{1}{t^2}\;dt\notag\\
+&= \sum_{m=1}^{[x]-1}\sum_{n\leq m}f(n)\bigg(\frac{1}{m}-\frac{1}{m+1}\bigg)+\sum_{n\leq x}f(n)\bigg(\frac{1}{[x]}-\frac{1}{x}\bigg)\notag\\
+&= \sum_{n\leq [x]-1}f(n)\sum_{m=n}^{[x]-1}\bigg(\frac{1}{m}-\frac{1}{m+1}\bigg)+\frac{1}{[x]}\sum_{n\leq x}f(n)-\frac{1}{x}\sum_{n\leq x}f(n)\label{switch_sum}
+\end{align}
+where we obtain~\eqref{switch_sum} via a simple reordering of the sum. Cancellation (from the telescoping series) now gives that
+\begin{align*}
+\int_1^x\frac{1}{t^2}\sum_{n\leq t}f(n)\;dt &= \sum_{n\leq [x]-1}\frac{f(n)}{n}+\frac{1}{[x]}f([x])-\frac{1}{x}\sum_{n\leq x}f(n)\\
+&= \sum_{n\leq x}\frac{f(n)}{n}-\frac{1}{x}\sum_{n\leq x}f(n),
+\end{align*}
+which is equivalent to~\eqref{log_identity}.
+
+So suppose that $\lim_{x\to\infty}\frac{1}{x}\sum_{n\leq x}f(n) = \alpha$. By~\eqref{log_identity},
+\begin{align}
+\lim_{x\to\infty}\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n} &= \lim_{x\to\infty}\bigg(\frac{1}{x\log{x}}\sum_{n\leq x}f(n)+\frac{1}{\log{x}}\int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}\bigg)\notag\\
+&= \lim_{x\to\infty}\frac{1}{\log{x}}\int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}.\label{alpha_integrand}
+\end{align}
+Given any $\epsilon >0$, there is an $x_0:=x_0(\epsilon)$ such that $|\frac{1}{x}\sum_{n\leq x}f(n)-\alpha|<\epsilon$ for $x>x_0$. Applying this inequality to the integrand in~\eqref{alpha_integrand}, for $x>x_0$ we have that
+\begin{align}
+\int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t} &= \int_1^{x_0}\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}+\int_{x_0}^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}\notag\\
+&= M(\epsilon)+\int_{x_0}^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}\notag\\
+&= M(\epsilon)+\int_{x_0}^x\alpha+\bigg(\sum_{n\leq t}f(n)-\alpha\bigg)\frac{dt}{t}\notag\\
+&= M(\epsilon)+\alpha(\log{x}-\log{x_0})+\int_{x_0}^x\bigg(\sum_{n\leq t}f(n)-\alpha\bigg)\frac{dt}{t}.\label{bound}
+\end{align}
+From~\eqref{bound} it immediately follows that
+\begin{align}
+\bigg|\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n}-\alpha\bigg| &< \frac{|M(\epsilon)|+|\alpha|\log{x_0}}{\log{x}}+\frac{\epsilon}{\log{x}}\int_{x_0}^x\frac{dt}{t}\notag\\
+&= \frac{|M(\epsilon)|+|\alpha|\log{x_0}}{\log{x}}+\epsilon\bigg(1-\frac{\log{x_0}}{\log{x}}\bigg)\label{log_lim}
+\end{align}
+for $x>x_0$. The desired result now follows from~\eqref{log_lim} since we can make the right-hand side arbitrarily small for all sufficiently large $x$.
+\end{proof}
+
+\begin{ex}{8}\label{eight}
+Let $f$ be an arithmetic function obeying the crude bound $f(n) = O(n^{o(1)})$, and let $\alpha$ be a complex number. If the logarithmic density of $f$ exists and is equal to $\alpha$, show that $(s-1)\mathcal{D}f(s)\to\alpha$ as $s\to 1^+$, or in other words that $\mathcal{D}f(s)=\frac{\alpha}{s-1}+o\big(\frac{1}{s-1}\big)$ as $s\to 1^+$.
 \end{ex}
 
 \end{document}
