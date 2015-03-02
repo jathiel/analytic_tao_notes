@@ -81,7 +81,7 @@ t\cdot P_{k,l-1}(t)-P_{k+1,l-1}(t) &= \sum_{i=0}^k(-1)^i(l-1+i)!\binom{k}{i}t^{k
 &= \sum_{i=0}^{k-1}(-1)^i(l+i)!\binom{k}{i}t^{k-i}+(-1)^k(l+k)!\\
 &= P_{k,l}(t).
 \end{align*}
-Therefore~\eqref{four_result} holds.
+Therefore~\eqref{four_result} and~\eqref{pkl_poly} hold in the general case.
 \end{proof}
 
 \begin{ex}{6}\label{six}
@@ -140,7 +140,7 @@ where we obtain~\eqref{switch_sum} via a simple reordering of the sum. Cancellat
 \end{align*}
 which is equivalent to~\eqref{log_identity}.
 
-So suppose that $\lim_{x\to\infty}\frac{1}{x}\sum_{n\leq x}f(n) = \alpha$. By~\eqref{log_identity},
+Now suppose that $\lim_{x\to\infty}\frac{1}{x}\sum_{n\leq x}f(n) = \alpha$. By~\eqref{log_identity},
 \begin{align}
 \lim_{x\to\infty}\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n} &= \lim_{x\to\infty}\bigg(\frac{1}{x\log{x}}\sum_{n\leq x}f(n)+\frac{1}{\log{x}}\int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}\bigg)\notag\\
 &= \lim_{x\to\infty}\frac{1}{\log{x}}\int_1^x\frac{1}{t}\sum_{n\leq t}f(n)\frac{dt}{t}.\label{alpha_integrand}
@@ -203,13 +203,13 @@ where $K(s,N):=\int_{1}^N\frac{(s-1)\log{x}}{x^s}\;dx$. Notice that $K(s,N)$ act
 \begin{align}
 \bigg|\int_1^\infty\frac{(s-1)^2}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx -\alpha\bigg| &< (s-1)\bigg(|M(\epsilon')|+\epsilon ' K(s)+|\alpha|\cdot\bigg|K(s)-\frac{1}{s-1}\bigg|\bigg).\label{final_form_limit}
 \end{align}
-Therefore, by~\eqref{final_form_limit}, to get the desired result, it is enough to show that $(s-1)K(s,N)\to 1$ as $N\to\infty$. A simple calculation shows that
+Therefore, by~\eqref{final_form_limit}, to get the desired result, it is enough to show that $(s-1)K(s,N)$ converges as $N\to\infty$. A simple calculation shows that
 \begin{align*}
 (s-1)K(s,N) &=\int_1^N\frac{(s-1)^2\log{x}}{x^s}\;dx\\
 &= -\frac{(s-1)\log{x}+1}{x^{s-1}}\bigg|_1^N\\
 &= 1-\frac{(s-1)\log{N}+1}{N^{s-1}},
 \end{align*}
-which gives the desired limit. This shows that the inequality in~\eqref{final_form_limit} can be made arbitrarily small as $s\to1^+$.
+which converges to 1 as $N\to\infty$. This shows that the inequality in~\eqref{final_form_limit} can be made arbitrarily small as $s\to1^+$.
 \end{proof}
 
 \begin{ex}{9}\label{nine}
@@ -225,6 +225,67 @@ for all $x\geq 1$, where $Q_k(t)$ is a polynomial with leading term $\frac{1}{k+
 \end{align*}
 for all $x\geq 1$, where $Q_{k,l}(t)$ is a polynomial with leading term $\frac{k!l!}{(k+l+1)!}t^{k+l+1}$.
 \end{enumerate}
+\end{ex}
+
+\begin{proof}
+As in Exercise~\ref{four}, we prove Exercise~\ref{nine} by induction on $l$. Statement $(i)$ is simply the base case where $l=0$, while $(ii)$ is the general case. We also give an explicit formula for $Q_{k,l}(t)$, namely
+\begin{align}
+Q_{k,l}(t) &= \frac{k!l!}{(k+l+1)!}t^{k+l+1}+(-1)^k\sum_{i=0}^l\binom{l}{i}(k+i)!t^{l-i}.\label{qkl_poly}
+\end{align}
+(Note that $Q_k(t)=Q_{k,0}(t)$.)
+
+Using~\eqref{log_identity} and~\eqref{four_result}, we have that
+\begin{align}
+\sum_{n\leq x}\frac{\log^k{n}}{n} &= \frac{1}{x}\sum_{n\leq x}\log^k{n}+\int_1^x\frac{1}{t}\sum_{n\leq t}\log^k{n}\frac{dt}{t}\notag\\
+&= P_{k,0}(\log{x})+\int_1^xP_{k,0}(\log{t})\frac{dt}{t}+O_k\bigg(\frac{\log^k(2+x)}{x}\bigg).\label{log_poly_int}
+\end{align}
+Applying~\eqref{pkl_poly} (with $l=0$) and integration by substitution on~\eqref{log_poly_int},
+\begin{align*}
+\int_1^xP_{k,0}(\log{t})\frac{dt}{t} &= \int_1^x\sum_{i=0}^k(-1)^i\frac{k!}{(k-i)!}\log^{k-i}{t}\frac{dt}{t}\\
+&= \sum_{i=0}^k(-1)^i\frac{k!}{(k+1-i)!}\log^{k+1-i}{x}.
+\end{align*}
+So
+\begin{align*}
+P_{k,0}(\log{x})+\int_1^xP_{k,0}(\log{t})\frac{dt}{t} &= \sum_{i=0}^k(-1)^i\frac{k!}{(k-i)!}\log^{k-i}{x}\bigg(\frac{\log{x}}{k+1-i}+1\bigg)\\
+&=\frac{1}{k+1}\log^{k+1}{x}+(-1)^kk!\\
+&= Q_k(\log{x})
+\end{align*}
+as desired in this case.
+
+For the general case where we have $(ii)$ for some $l-1\geq 0$, it follows by assumption that
+\begin{align*}
+\sum_{n\leq x}\frac{\log^k{n}\log^l{\frac{x}{n}}}{n} &= \log{x}\sum_{n\leq x}\frac{\log^k{n}\log^{l-1}{\frac{x}{n}}}{n} -\sum_{n\leq x}\frac{\log^{k+1}{n}\log^{l-1}{\frac{x}{n}}}{n}\\
+&= \log{x}\cdot Q_{k,l-1}(\log{x})-Q_{k+1,l-1}(\log{x})+O_{k,l}\bigg(\frac{\log^{k+l}(2+x)}{x}\bigg).
+\end{align*}
+In other words, to complete the proof, it is enough to show that
+\begin{align*}
+Q_{k,l}(t) &= t\cdot Q_{k,l-1}(t)-Q_{k+1,l-1}(t).
+\end{align*}
+From~\eqref{qkl_poly}, we have
+\begin{align*}
+t\cdot Q_{k,l-1}(t)-Q_{k+1,l-1}(t) &= \frac{k!(l-1)!}{(k+l)!}t^{k+l+1}+(-1)^k\sum_{i=0}^{l-1}\binom{l-1}{i}(k+i)!t^{l-i}\\
+& \qquad\qquad -\frac{(k+1)!(l-1)!}{(k+l+1)!}t^{k+l+1}+(-1)^k\sum_{i=0}^{l-1}\binom{l-1}{i}(k+1+i)!t^{l-1-i}\\
+&= \frac{k!(l-1)!}{(k+l)!}\bigg(1-\frac{k+1}{k+l+1}\bigg)t^{k+l+1}+(-1)^kk!t^l\\
+& \qquad\qquad +(-1)^k\sum_{i=1}^{l-1}\bigg(\binom{l-1}{i}+\binom{l-1}{i-1}\bigg)(k+i)!t^{l-i}\\
+&= Q_{k,l}(t),
+\end{align*}
+which gives $(ii)$.
+\end{proof}
+
+\begin{ex}{10}\label{ten}
+Show rigorously that for any non-negative integer $k\geq 0$ and real $s>1$, the Riemann zeta function $\zeta$ is $k$-times differentiable at $s$ and one has
+\begin{align*}
+\zeta^{(k)}(s) &= (-1)^k\sum_{n=1}^\infty\frac{\log^k{n}}{n^s}\\
+&= (-1)^k\frac{k!}{(s-1)^{k+1}}+O_k(1).
+\end{align*}
+\end{ex}
+
+\begin{ex}{11}\label{eleven}
+Let $y<x$ be real numbers, and let $f:[y,z]\to\mathbb{C}$ be a continuously differentiable function. Show that
+\begin{align*}
+\sum_{n\in\mathcal{Z}:y\leq n\leq x}f(n)=\int_y^xf(t)\;dt+O\bigg(\int_y^x|f'(t)|\;dt+|f(y)|\bigg).
+\end{align*}
+Conclude that if $t$ is a non-zero number, that the function $n\mapsto n^{\imath t}$ has logarithmic density zero, but does not have a natural density.
 \end{ex}
 
 \end{document}
