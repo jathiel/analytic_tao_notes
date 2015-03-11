@@ -379,7 +379,7 @@ by Exercise~\ref{eleven}. If $f_t(n)$ has a natural density, then the limit of $
 \begin{ex}{16}\label{sixteen}
 Derive the identity
 \begin{align}
-\sum_p\frac{\log{p}}{p^s-1} &= -\frac{\zeta'(s)}{\zeta(s)}
+\sum_p\frac{\log{p}}{p^s-1} &= -\frac{\zeta'(s)}{\zeta(s)}\label{zeta_log_deriv}
 \end{align}
 for all $s>1$, rigorously.
 \end{ex}
@@ -389,9 +389,7 @@ We already have the identity
 \begin{align}
 -\sum_p\log{\bigg(1-\frac{1}{p^s}\bigg)} &= \log{\zeta(s)}\label{log_zeta}
 \end{align}
-for all $s>1$.
-
-INCOMPLETE
+for all $s>1$. The proof essentially mimics the proof of Exercise~\ref{ten}. The uniform convergence of~\eqref{zeta_log_deriv} on a small closed interval around $s$ allows one to integrate $\sum_p\frac{\log{p}}{p^s-1}$ term-by-term and then apply the Fundamental Theorem of Calculus to get the desired result.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -409,7 +407,7 @@ The first inequality is trivial by the definition of $\Lambda(n)$. Using Rankin'
 \begin{align}
 \sum_{n\leq x}\frac{\Lambda(n)}{n} &\ll \sum_{n\leq x}\frac{\Lambda(n)}{n^{1+1/\log{x}}}.\label{L1}
 \end{align}
-From the notes, we already have that 
+From the notes, we already have that
 \begin{align}
 \sum_{n\leq x}\frac{\Lambda(n)}{n^s} &= \frac{1}{s-1}+O(1)\label{L_notes}
 \end{align}
@@ -441,7 +439,7 @@ The last big-oh estimate follows by using very crude estimates. In particular, f
 &= O\bigg(\sqrt{x}+\frac{x}{\log^2{\sqrt{x}}}\bigg)\\
 &= O\bigg(\frac{x}{\log^2{x}}\bigg).
 \end{align*}
-For $2\leq x\leq 4$, the same bound holds trivially. 
+For $2\leq x\leq 4$, the same bound holds trivially.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
