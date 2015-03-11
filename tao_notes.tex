@@ -30,7 +30,13 @@
 \date{}
 \maketitle
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Summing monotone functions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{ex}{4}\label{four}
 For non-negative numbers $k,l\geq0$, show that
@@ -84,6 +90,8 @@ t\cdot P_{k,l-1}(t)-P_{k+1,l-1}(t) &= \sum_{i=0}^k(-1)^i(l-1+i)!\binom{k}{i}t^{k
 Therefore~\eqref{four_result} and~\eqref{pkl_poly} hold in the general case.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{ex}{6}\label{six}
 Let $f:\mathbb{N}\to\mathbb{C}$, $F:\mathbb{R}^+\to\mathbb{C}$ and $g:\mathbb{R}^+\to\mathbb{R}^+$ be functions such that $g(x)\to 0$ as $x\to\infty$. Then the following are equivalent:
 \begin{enumerate}
@@ -112,6 +120,8 @@ E(x):= \sum_{n<x} f(n) - F(x).\label{e_def}
 \end{align}
 Our goal is to show that~\eqref{e_def} converges to some constant as $x\to\infty$. Suppose that this is not the case. Then there is some $\epsilon >0$ and two strictly increasing sequences $\{x_n\}_{n=1}^\infty$, $\{y_n\}_{n=1}^\infty$ with $x_n > y_n\geq 1$ for all $n$ such that $|E(x_n)-E(y_n)| \geq \epsilon$. However, by assumption, we have that $E(x_n)-E(y_n)=O(g(x_n)+g(y_n))$, which converges to 0 as $n\to\infty$. This contradiction gives the desired result.
 \end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{ex}{7}\label{seven}
 Let $f$ be an arithmetic function. If the natural density $\lim_{x\to\infty}\frac{1}{x}\sum_{n\leq x}f(n)$ of $f$ exists and is equal to some complex number $\alpha$, show that the logarithmic density $\lim_{x\to\infty}\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n}$ also exists and is equal to $\alpha$.
@@ -160,6 +170,8 @@ From~\eqref{bound} it immediately follows that
 for $x>x_0$. The desired result now follows from~\eqref{log_lim} since we can make the right-hand side arbitrarily small for all sufficiently large $x$.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{ex}{8}\label{eight}
 Let $f$ be an arithmetic function obeying the crude bound $f(n) = O(n^{o(1)})$, and let $\alpha$ be a complex number. If the logarithmic density of $f$ exists and is equal to $\alpha$, show that $(s-1)\mathcal{D}f(s)\to\alpha$ as $s\to 1^+$, or in other words that $\mathcal{D}f(s)=\frac{\alpha}{s-1}+o\big(\frac{1}{s-1}\big)$ as $s\to 1^+$.
 \end{ex}
@@ -199,7 +211,7 @@ Using the same type of argument as in Exercise~\ref{eight}, for any $\epsilon'>0
 \begin{align*}
 \int_1^N\frac{s-1}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx &= \int_1^N\frac{(s-1)\log{x}}{x^s}\bigg(\alpha+\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n}-\alpha\bigg)\;dx\\ &= \alpha K(s,N)+M(\epsilon')+\int_{N_1}^N\frac{(s-1)\log{x}}{x^s}\bigg(\frac{1}{\log{x}}\sum_{n\leq x}\frac{f(n)}{n}-\alpha\bigg)\;dx.
 \end{align*}
-where $K(s,N):=\int_{1}^N\frac{(s-1)\log{x}}{x^s}\;dx$. Notice that $K(s,N)$ actually converges as $N\to\infty$ for any $s>1$. With this in mind, we define $K(s):=\lim_{N\to\infty}K(s,N)$. So
+where $K(s,N):=\int_{1}^N\frac{(s-1)\log{x}}{x^s}\;dx$. Notice that $K(s,N)$ is monotonically increasing and actually converges as $N\to\infty$ for any $s>1$. With this in mind, we define $K(s):=\lim_{N\to\infty}K(s,N)$. So
 \begin{align}
 \bigg|\int_1^\infty\frac{(s-1)^2}{x^s}\sum_{n\leq x}\frac{f(n)}{n}\;dx -\alpha\bigg| &< (s-1)\bigg(|M(\epsilon')|+\epsilon ' K(s)+|\alpha|\cdot\bigg|K(s)-\frac{1}{s-1}\bigg|\bigg).\label{final_form_limit}
 \end{align}
@@ -211,6 +223,8 @@ Therefore, by~\eqref{final_form_limit}, to get the desired result, it is enough 
 \end{align*}
 which converges to 1 as $N\to\infty$. This shows that the inequality in~\eqref{final_form_limit} can be made arbitrarily small as $s\to1^+$.
 \end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{ex}{9}\label{nine}
 \begin{enumerate}
@@ -272,16 +286,48 @@ t\cdot Q_{k,l-1}(t)-Q_{k+1,l-1}(t) &= \frac{k!(l-1)!}{(k+l)!}t^{k+l+1}+(-1)^k\su
 which gives $(ii)$.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{ex}{10}\label{ten}
 Show rigorously that for any non-negative integer $k\geq 0$ and real $s>1$, the Riemann zeta function $\zeta$ is $k$-times differentiable at $s$ and one has
-\begin{align*}
-\zeta^{(k)}(s) &= (-1)^k\sum_{n=1}^\infty\frac{\log^k{n}}{n^s}\\
-&= (-1)^k\frac{k!}{(s-1)^{k+1}}+O_k(1).
-\end{align*}
+\begin{align}
+\zeta^{(k)}(s) &= (-1)^k\sum_{n=1}^\infty\frac{\log^k{n}}{n^s}\label{zeta_deriv}\\
+&= (-1)^k\frac{k!}{(s-1)^{k+1}}+O_k(1).\label{zeta_deriv_2}
+\end{align}
 \end{ex}
 
 \begin{proof}
-\phantom{a}
+Let
+\begin{align}
+f_N(s) &= -\sum_{n\leq N}\frac{\log{n}}{n^s}\label{fn_def}
+\end{align}
+for $s>1$. It is clear that $f_N$ converges, to $f$ say, as $N\to\infty$ for all $s>1$ since $\log{x}=O_\epsilon(x^\epsilon)$ for all $\epsilon>0$. Our goal is to show that $f(s) = \zeta'(s)$.
+
+Fix an $s_0>1$. Then for any $s> s_0$, let $\delta=\frac{s+s_0}{2}$. It follows that
+\begin{align}
+\sum_{n>N}\frac{\log{n}}{n^s} &= O_\delta\bigg(\sum_{n>N}\frac{1}{n^{s-\delta}}\bigg)\notag\\
+&= O_\delta\bigg(\sum_{n>N}\frac{1}{n^{s_0}}\bigg)\notag\\
+&= O_\delta\bigg(\frac{1}{n^{s_0-1}}\bigg).\label{tail_bound}
+\end{align}
+While the big-oh constant in~\eqref{tail_bound} depends on $\delta$, since we can restrict our attention to a small closed interval around $s$ (that is bounded away from 1), we can choose a uniform constant in~\eqref{tail_bound}. This shows that $f_N(s)$ converges uniformally to $f(s)$ on a sufficiently small closed interval containing $s$. By this uniform convergence of $f_N$, we can choose a constant $a>1$ sufficiently close to $s$ so that
+\begin{align}
+\int_a^s f(t)\;dt &= \lim_{N\to\infty} \int_a^s f_N(t)\;dt\notag\\
+&= \lim_{N\to\infty}-\sum_{n\leq N}\int_a^s \frac{\log{n}}{n^t}\;dt\notag\\
+&= \lim_{N\to\infty} \sum_{n\leq N}\bigg(\frac{1}{n^s}-\frac{1}{n^a}\bigg)\notag\\
+&= \zeta(s)-c(a),\label{zeta_const}
+\end{align}
+where $c(a)$ is a constant that depends only on $a$. By the Fundamental Theorem of Calculus, it follows from~\eqref{zeta_const} that $f(s)=\zeta'(s)$, as desired. Using induction, we can modify~\eqref{fn_def} to get~\eqref{zeta_deriv} for all $k\geq 0$.
+
+Applying Lemma 2 to the sum $-\sum_{y\leq n<x}\frac{\log{n}}{n^s}$ gives that
+\begin{align}
+-\sum_{y\leq n<x}\frac{\log{n}}{n^s} &= -\int_y^x\frac{\log{t}}{t^s}\;dt + O\bigg(\frac{\log{x}}{x^s}+\frac{\log{y}}{y^s}\bigg)\notag\\
+&= \frac{y^{1-s}(1+(s-1)\log{y})}{(s-1)^2} - \frac{x^{1-s}(1+(s-1)\log{x})}{(s-1)^2} + O\bigg(\frac{\log{x}}{x^s}+\frac{\log{y}}{y^s}\bigg).\label{part_zeta_sum}
+\end{align}
+We can now apply the result of Exercise~\ref{six} to~\eqref{part_zeta_sum}. In particular, we get that
+\begin{align*}
+\zeta'(s) &= -\frac{1}{(s-1)^2}+O(1).
+\end{align*}
+This argument can also be extended by induction to get~\eqref{zeta_deriv_2} for all $k\geq 0$.
 \end{proof}
 
 \begin{ex}{11}\label{eleven}
@@ -321,5 +367,84 @@ For any $\epsilon>0$, we have
 \end{align}
 by Exercise~\ref{eleven}. If $f_t(n)$ has a natural density, then the limit of $\frac{1}{x}\sum_{x\leq n\leq (1+\epsilon)x}f_t(n)$ must be zero as $x\to\infty$. However,~\eqref{cauchy_sum} shows that this cannot be the case. It follows that $f_t(n)$ does not have a natural density.
 \end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Euler product and Rankin's trick}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{ex}{16}\label{sixteen}
+Derive the identity
+\begin{align}
+\sum_p\frac{\log{p}}{p^s-1} &= -\frac{\zeta'(s)}{\zeta(s)}
+\end{align}
+for all $s>1$, rigorously.
+\end{ex}
+
+\begin{proof}
+We already have the identity
+\begin{align}
+-\sum_p\log{\bigg(1-\frac{1}{p^s}\bigg)} &= \log{\zeta(s)}\label{log_zeta}
+\end{align}
+for all $s>1$.
+
+INCOMPLETE
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{ex}{17}\label{seventeen}
+Show that
+\begin{align*}
+\sum_{p\leq x}\frac{\log{p}}{p} \leq \sum_{n\leq x}\frac{\Lambda(n)}{n} \ll \log{x}
+\end{align*}
+for all $x\geq 2$.
+\end{ex}
+
+\begin{proof}
+The first inequality is trivial by the definition of $\Lambda(n)$. Using Rankin's trick, we have
+\begin{align}
+\sum_{n\leq x}\frac{\Lambda(n)}{n} &\ll \sum_{n\leq x}\frac{\Lambda(n)}{n^{1+1/\log{x}}}.\label{L1}
+\end{align}
+From the notes, we already have that 
+\begin{align}
+\sum_{n\leq x}\frac{\Lambda(n)}{n^s} &= \frac{1}{s-1}+O(1)\label{L_notes}
+\end{align}
+for all $s>1$. Applying~\eqref{L_notes} to~\eqref{L1} with $s = 1+\frac{1}{\log{x}}$ gives the desired result.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{ex}{20}\label{twenty}
+Show that the number of primes up to $x$ is $O\big(\frac{x}{\log{x}}\big)$ for any $x\geq 2$.
+\end{ex}
+
+\begin{proof}
+By following the same strategy leading to~\eqref{log_identity} in Exercise~\ref{seven}, it follows that
+\begin{align}
+\sum_{3/2< n\leq x} \frac{f(n)}{\log{n}} &= \frac{1}{\log{x}}\sum_{n\leq x}f(n)-\frac{f(1)}{\log{3/2}}+\int_{3/2}^x\frac{1}{t\log^2{t}}\sum_{n\leq t} f(n)\;dt\label{log_denom}
+\end{align}
+for any arithmetic function $f$. We now apply~\eqref{log_denom} and Proposition 18 to the prime counting function $\pi(x)$. It follows that
+\begin{align*}
+\pi(x) &= \sum_{p\leq x} 1\\
+&= \sum_{p\leq x} \frac{\log{p}}{\log{p}}\\
+&= \frac{1}{\log{x}}\sum_{p\leq x}\log{p}+\int_{3/2}^x\frac{1}{t\log^2{t}}\sum_{p\leq t} \log{p}\;dt\\
+&= O\bigg(\frac{x}{\log{x}}\bigg)+O\bigg(\int_{3/2}^x\frac{1}{\log^2{t}}\;dt\bigg)\\
+&= O\bigg(\frac{x}{\log{x}}\bigg).
+\end{align*}
+The last big-oh estimate follows by using very crude estimates. In particular, for $x>4$, we have
+\begin{align*}
+\int_{3/2}^x\frac{1}{\log^2{t}}\;dt &= \int_{3/2}^{\sqrt{x}}\frac{1}{\log{t}}\;dt+\int_{\sqrt{x}}^x\frac{1}{\log{t}}\;dt\\
+&= O\bigg(\sqrt{x}+\frac{x}{\log^2{\sqrt{x}}}\bigg)\\
+&= O\bigg(\frac{x}{\log^2{x}}\bigg).
+\end{align*}
+For $2\leq x\leq 4$, the same bound holds trivially. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
